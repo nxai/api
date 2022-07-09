@@ -4,21 +4,99 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>API</title>
+    <link rel="stylesheet" href="./css/index.css">
+
 </head>
 <body>
-    <script>
-        let request = new XMLHttpRequest();
-        request.open('GET','https://jsonplaceholder.typicode.com/users');
-        request.send();
-        request.onload = ()=>{
-            console.log(request);
-            if(request.status ===200){
-                console.log(JSON.parse(request.response))
-            }else{
-                console.log(`error ${request.status} ${request.statusText}`);
-            }
-        }
-    </script>
+    <div class="container">
+        <div class="title">
+            <h1>book list</h1>
+            <div class="btn-add" onclick="open_modal_add()">
+                add
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:50px;">NO</th>
+                    <th>Name</th>
+                    <th>type</th>
+                    <th style="width:250px;">action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>book name</td>
+                    <td>inspire</td>
+                    <td>
+                        <div class="btn-control">
+                            <div onclick="open_modal_edit()" class="btn-edit">edit</div>
+                            <div onclick="deelet_booklist()" class="btn-delete">delete</div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- add modal -->
+    <div class="modal" id="modal_add">
+        <div class="modal-bg" onclick="close_modal()"></div>
+        <div class="modal-card">
+            <h1>add book list</h1>
+            <div class="form-control">
+                <span>Name</span>
+                <input type="text" class="txt" placeholder="insert book name">
+            </div>
+            <div class="form-control">
+                <span>Type</span>
+                <select class="txt">
+                    <option value="">-- select --</option>
+                    <option value="Business/economics">Business/economics</option>
+                    <option value="History">History</option>
+                    <option value="Journal">Journal</option>
+                    <option value="Travel">Travel</option>
+                </select>
+            </div>
+            <div class="form-submit">
+                <div onclick="save_booklist()" class="btn-add">add book</div>
+            </div>
+        </div>
+    </div>
+ <!-- edit modal -->
+ <div class="modal" id="modal_edit">
+    <div class="modal-bg" onclick="close_modal()"></div>
+    <div class="modal-card">
+        <h1>edit book list</h1>
+        <div class="form-control">
+            <span>Name</span>
+            <input type="text" class="txt" placeholder="insert book name">
+        </div>
+        <div class="form-control">
+            <span>Type</span>
+            <select class="txt">
+                <option value="">-- select --</option>
+                <option value="Business/economics">Business/economics</option>
+                <option value="History">History</option>
+                <option value="Journal">Journal</option>
+                <option value="Travel">Travel</option>
+            </select>
+        </div>
+        <div class="form-submit">
+            <div onclick="update_booklist()" class="btn-edit">edit book</div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- sweetalert 2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="./js/index.js"></script>
 </body>
 </html>
