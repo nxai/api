@@ -1,5 +1,6 @@
 var html, data;
-$(document).raedy(function(){
+
+$(document).ready(function() {
     render();
 });
 
@@ -11,8 +12,27 @@ function render(){
         dataType:"JSON",
         url:"./api/get_booklist.php",
         data: {},
-        succes: function(response){
+        success: function(response){
             console.log("good", response);
+
+            data = response.result;
+
+            for(var i =0; i<data.length; i++){
+                html +=`
+                <tr>
+                <td>${i}</td>
+                <td>${data[i].name}</td>
+                <td>${data[i].type}</td>
+                <td>
+                    <div class="btn-control">
+                        <div onclick="open_modal_edit()" class="btn-edit">edit</div>
+                        <div onclick="deelet_booklist()" class="btn-delete">delete</div>
+                    </div>
+                </td>
+            </tr>
+                `
+            }
+            $('#tbody').html(html);
         },error: function(err){
             console.log("bad",err);
         }
